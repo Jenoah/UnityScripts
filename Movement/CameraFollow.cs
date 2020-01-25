@@ -7,14 +7,17 @@ public class CameraFollow : MonoBehaviour
     private Vector3 offset = Vector3.zero;
     [SerializeField]
     private Transform target = null;
-    [SerializeField, Range(0.005f, 1f)]
-    private float smoothing = 0.125f;
+    [SerializeField, Range(1f, 60f)]
+    private float moveSmoothing = 20f;
 
     [Header("Look at")]
     [SerializeField]
     private bool lookAtTarget = true;
     [SerializeField]
     private Vector3 lookAtOffset = Vector3.zero;
+    [SerializeField, Range(1f, 60f)]
+    private float lookAtSmoothing = 20f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +28,15 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         Vector3 targetPos = target.position + offset;
-        transform.position = Vector3.Lerp(transform.position, targetPos, smoothing);
+        transform.position = Vector3.Lerp(transform.position, targetPos, moveSmoothing * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
         if (lookAtTarget)
         {
-            transform.LookAt(target.position + lookAtOffset);
+            Quaternion lookAtPos = Quaternion.LookRotation(target.transform.position - transform.position + lookAtOffset);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookAtPos, lookAtSmoothing * Time.deltaTime);
         }
     }
 }
