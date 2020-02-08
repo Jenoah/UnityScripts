@@ -9,5 +9,9 @@ A few scripts that I use to gain functionality quickly
 
 #### Animate:
   Allows the player to animate based on the button presses and places feet on the surface transform. This includes position and rotation
+
 #### VR Rig:
   Adds scripts, models and prefabs to the project which can be used as a basic VR setup. Models are for Oculus Touch (Rift S / Quest) and requires some preperation. These can be found in git file description
+
+#### Rope Generator:
+  An editor tools which quickly creates ropelights. Accessable under Tools > RopeGenerator
