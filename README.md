@@ -11,6 +11,9 @@ You are free to use/modify these scripts as long as you reference to this repo w
 
 #### IK:
 	Inverse kinematics
+	
+#### Managers
+	Includes some basic templates for different managers
 
 #### Misc:
 	Probably something that I was to lazy to categorize...
