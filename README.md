@@ -18,5 +18,8 @@ You are free to use/modify these scripts as long as you reference to this repo w
 #### ThirdPerson:
 	These are made for third person specific things
 
+#### UI
+	I think there are UI related scripts in here.. Or maybe flying bears?
+
 #### VR
 	Just as thirdperson but for v1rTu4l R3al1tY
