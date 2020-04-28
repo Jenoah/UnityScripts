@@ -23,6 +23,9 @@ You are free to use/modify these scripts as long as you reference to this repo w
 
 #### UI
 	I think there are UI related scripts in here.. Or maybe flying bears?
+	
+#### Shaders
+	Visualitynessifulish
 
 #### VR
 	Just as thirdperson but for v1rTu4l R3al1tY
