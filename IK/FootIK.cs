@@ -25,11 +25,11 @@ public class FootIK : MonoBehaviour
 
     [Header("Step settings")]
     [SerializeField]
-    private float stepAtDistance = 0.8f;
+    private float stepAtDistance = 0.5f;
     [SerializeField]
-    private float stepDuration = 0.5f;
+    private float stepDuration = 0.3f;
     [SerializeField]
-    private float stepOvershootFraction = 0.2f;
+    private float stepOvershootFraction = 1.5f;
 
     [SerializeField]
     private bool leftIsMoving = false;
