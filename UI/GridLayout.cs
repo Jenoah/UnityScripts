@@ -108,10 +108,4 @@ public class GridLayout : LayoutGroup
     {
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
