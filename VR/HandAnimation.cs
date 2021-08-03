@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// For more help, watch: https://www.youtube.com/watch?v=DxKWq7z4Xao
+
+
 public class HandAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator = null;
@@ -13,13 +16,12 @@ public class HandAnimation : MonoBehaviour
     private float targetTriggerValue = 0f;
     private float targetGripValue = 0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (animator == null) animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         AnimateHands();
