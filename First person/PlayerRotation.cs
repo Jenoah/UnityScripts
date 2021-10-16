@@ -4,31 +4,37 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
-    [SerializeField] private Transform cam = null;
-    [SerializeField] private float verticalRotationSpeed = 400f;
-    [SerializeField] private float horizontalRotationSpeed = 400f;
-    [SerializeField] private Vector2 verticalRotationLimit = new Vector2(-90f, 90f);
+    [Header("References")]
+    [SerializeField] private Transform cameraTransform = null;
+
+    [Header("Rotation speed")]
+    [SerializeField] private float verticalRotationSpeed = 7.5f;
+    [SerializeField] private float horizontalRotationSpeed = 7.5f;
+
+    [Header("Limits")]
+    [SerializeField, Range(0f, 89.99f)] private float upperRotationLimit = 89.99f;
+    [SerializeField, Range(-89.99f, 0f)] private float lowerRotationLimit = -89.99f;
 
     private float currentVerticalAngle = 0;
     private float currentHorizontalAngle = 0;
     // Start is called before the first frame update
     void Start()
     {
-        if(cam == null)
+        if(cameraTransform == null)
         {
-            cam = Camera.main.transform;
+            cameraTransform = Camera.main.transform;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentVerticalAngle -= Input.GetAxis("Mouse Y") * Time.deltaTime * verticalRotationSpeed;
-        currentHorizontalAngle += Input.GetAxis("Mouse X") * horizontalRotationSpeed * Time.deltaTime;
+        currentVerticalAngle -= Input.GetAxis("Mouse Y") * verticalRotationSpeed;
+        currentHorizontalAngle += Input.GetAxis("Mouse X") * horizontalRotationSpeed;
 
-        currentVerticalAngle = Mathf.Clamp(currentVerticalAngle, verticalRotationLimit.x, verticalRotationLimit.y);
+        currentVerticalAngle = Mathf.Clamp(currentVerticalAngle, lowerRotationLimit, upperRotationLimit);
 
-        cam.localRotation = Quaternion.Euler(currentVerticalAngle, 0, 0);
+        cameraTransform.localRotation = Quaternion.Euler(currentVerticalAngle, 0, 0);
         transform.localRotation = Quaternion.Euler(0, currentHorizontalAngle, 0);
 
     }

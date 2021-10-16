@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     private enum MoveState
@@ -16,17 +17,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fastCrouchSpeed = 2f;
 
     [Header("Generic")]
-    [SerializeField, Range(0f, 10f)] private float moveStateTransitionSmoothing = 0.3f;
-    [SerializeField, Range(0f, 10f)] private float crouchTransitionSmoothing = 0.3f;
-    [SerializeField] private Rigidbody playerRigidbody = null;
+    [SerializeField, Range(0f, 10f)] private float moveStateTransitionSmoothing = 1.5f;
+    [SerializeField, Range(0f, 10f)] private float crouchTransitionSmoothing = 5f;
     [SerializeField] private Transform cameraHolder = null;
+    private Rigidbody playerRigidbody = null;
 
     [Header("Collision")]
     [SerializeField] private CapsuleCollider playerCollider = null;
     [SerializeField] private float standingHeight = 1.8f;
     [SerializeField] private float crouchHeight = 1.1f;
     [SerializeField] private float fastCrouchHeight = 1.3f;
-
 
     private MoveState currentMoveState = MoveState.walking;
     private float currentMoveSpeed = 0;
@@ -36,9 +36,13 @@ public class PlayerMovement : MonoBehaviour
     private float targetColliderHeight = 1.8f;
 
     private Vector3 moveVector = Vector3.zero;
+    private float cameraHeight = 0f;
 
     private void Start()
     {
+        playerRigidbody = GetComponent<Rigidbody>();
+        cameraHeight = (cameraHolder.position.y - transform.position.y) - standingHeight;
+        currentColliderHeight = standingHeight;
         SetMoveState(MoveState.walking);
     }
 
@@ -66,9 +70,8 @@ public class PlayerMovement : MonoBehaviour
         currentColliderHeight = Mathf.Lerp(currentColliderHeight, targetColliderHeight, crouchTransitionSmoothing * Time.deltaTime);
 
         playerCollider.height = currentColliderHeight;
-        playerCollider.center = new Vector3(0, currentColliderHeight / 2, 0);
 
-        cameraHolder.transform.localPosition = new Vector3(0, currentColliderHeight, 0);
+        cameraHolder.transform.localPosition = new Vector3(0, currentColliderHeight + cameraHeight, 0);
     }
 
     void FixedUpdate()
