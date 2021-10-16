@@ -29,8 +29,8 @@ public class PlayerRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentVerticalAngle -= Input.GetAxis("Mouse Y") * verticalRotationSpeed;
-        currentHorizontalAngle += Input.GetAxis("Mouse X") * horizontalRotationSpeed;
+        currentVerticalAngle -= Input.GetAxis("Mouse Y") * verticalRotationSpeed * Time.timeScale;
+        currentHorizontalAngle += Input.GetAxis("Mouse X") * horizontalRotationSpeed * Time.timeScale;
 
         currentVerticalAngle = Mathf.Clamp(currentVerticalAngle, lowerRotationLimit, upperRotationLimit);
 
